@@ -35,7 +35,6 @@ body {
 	transition: transform 0.2s;
 	z-index: 999;
 
-
 	&__items {
 		position: relative;
 		display: flex;
@@ -56,6 +55,8 @@ body {
 
 			&:hover .desktop-dropdown {
 				height: 185px;
+	box-shadow: inset -1px -5px 10px -5px rgb(44, 37, 255);
+
 			}
 
 			.desktop-dropdown {
@@ -68,7 +69,7 @@ body {
 				border-bottom-right-radius: 5px;
 				background-color: #18053e;
 
-				transition: height 0.3s;
+				transition: height 0.3s , box-shadow 0.3s;
 				overflow: hidden;
 
 				.dropdown-link {
@@ -116,6 +117,40 @@ body {
 		border-radius: 5px;
 	}
 
+	&__search-list {
+		visibility: hidden;
+		position: absolute;
+		display: flex;
+		flex-direction: column;
+		top: 80px;
+		left: -80px;
+		width: 300px;
+		border-radius: 5px;
+		padding: 1em;
+		background-color: #eee;
+
+
+		&-li {
+			font-size: 1.6rem;
+			color: #333;
+			list-style: none;
+			padding: 0.5em;
+			font-weight: bold;
+
+
+			a {
+				text-decoration: none;
+				width: 100%;
+			}
+		}
+		
+
+		
+	}
+
+
+	
+
 	&__search-btn {
 		position: absolute;
 		right: 0;
@@ -157,13 +192,13 @@ body {
 	top: 12%;
 	left: 0;
 	width: 150%;
-	height: 520px;
+	height: 600px;
 	transform: translateX(100%);
 	transition: height 0.3s, transform 0.3s;
 	background-color: rgb(113, 132, 238);
 	box-shadow: 8px 9px 6px -3px rgba(0, 0, 0, 0.697);
 	border-radius: 5px;
-	z-index: 99;
+	z-index: 9999;
 
 	&--active {
 		transform: translateX(20%);
@@ -256,6 +291,9 @@ body {
 		border-radius: 5px;
 	}
 
+
+	
+
 	&__search-btn {
 		position: absolute;
 		right: -20px;
@@ -275,6 +313,33 @@ body {
 
 	&__search-btn:focus {
 		background-color: #2451e5;
+	}
+
+
+	&__search-list {
+		margin-left: 1.3em;
+		background-color: #eeeeee;
+		border-radius: 5px;
+		width: 169px;
+		display: none;
+		
+
+		&-li {
+
+			font-size: 1.6rem;
+			list-style: none;
+			padding: 0.7em;
+			font-weight: bold;
+
+			.mobile-search-link {
+				text-decoration: none;
+
+
+				&:hover {
+					color: rgb(57, 81, 204);
+				}
+			}
+		}
 	}
 }
 
@@ -443,6 +508,12 @@ body {
 		.fa-brands,
 		.fa-solid {
 			margin-right: 0.2em;
+			transition: transform .5s;
+		}
+
+
+		.brands--active {
+			transform: rotate(360deg);
 		}
 	}
 
@@ -504,34 +575,13 @@ body {
 		background-color: rgb(55, 10, 86);
 		border: 2px solid rgb(40, 20, 70);
 		box-shadow: 8px 9px 6px -3px rgba(0, 0, 0, 0.697);
-
-		border-radius: 3px;
+		border-radius: 5px;
 		overflow: hidden;
-		opacity: 0;
 		transition: box-shadow 0.3s, transform 0.3s;
-
-
-		&--active {
-			animation: card-down 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-
-		}
-
-		@keyframes card-down {
-			0% {
-			  transform: translateY(1000px);
-			  opacity: 0;
-			}
-			100% {
-			  transform: translateY(0);
-			  opacity: 1;
-			}
-		  }
-		  
 
 		&:hover {
 			box-shadow: 11px 12px 10px -3px rgba(0, 10, 121, 1);
 
-			// transform: scale(1.02);
 			transform: translate(-5px, -5px) scale(1.02);
 		}
 
@@ -588,6 +638,149 @@ body {
 		padding: 1em;
 		height: 100%;
 	}
+
+
+	///////// ORDER ////////
+
+
+	.order {
+		position: fixed;
+		display: none;
+		flex-direction: column;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+		padding: 2em;
+		border-radius: 5px;
+		width: 300px;
+		height: 600px;
+		background-color: #8fe1f1;
+		box-shadow: 8px 9px 6px -3px rgba(0, 0, 0, 0.71);
+		z-index: 999;
+
+
+		hr {
+			border: 1px solid white;
+		}
+
+
+    &__title {
+        text-align: center;
+		padding: 1em;
+		color: rgb(45, 33, 87);
+		font-size: 2rem;
+
+	}
+
+
+	&__box {
+		width: 100%;
+		height: 100%;
+
+		&-items {
+			display: flex;
+			justify-content: space-evenly;
+			align-items: center;
+			margin: 3em 0;
+		}
+
+		&-console {
+			font-size: 1.6rem;
+			font-weight: bold;
+		}
+
+		img {
+			width: 70px;
+			height: 70px;
+			border-radius: 5px;
+		}
+
+
+		&-term {
+
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+
+
+		}
+
+		&-from,
+		&-to{
+			display: flex;
+			justify-content: space-evenly;
+			align-items: center;
+			width: 100%;
+			margin: 3em 0;
+		}
+
+		&-label {
+			font-size: 1.6rem;
+			font-weight: bold;
+			// margin: 1em;
+		}
+
+		&-input {
+			border: none;
+			background-color: #f3f6ff;
+			padding: 0.5em;
+			font-size: 1.4rem;
+		}
+
+
+		&-price {
+			display: flex;
+			flex-direction: column;
+			justify-self: center;
+			align-items: center;
+			padding-top: 2em;
+
+
+			&-txt {
+
+				font-size: 3.5rem;
+				font-weight: bold;
+				padding: 0.5em;
+				color: #4000ff;
+			}
+
+			&-btn {
+
+				font-size: 1.4rem;
+				font-weight: bold;
+				padding: 1em;
+				border-radius: 5px;
+				border: none;
+				cursor: pointer;
+
+				&:hover {
+					background-color: royalblue;
+					color: white;
+				}
+			}
+
+		}
+		&-btn {
+
+			&-close {
+				position: absolute;
+				top: 0;
+				right: 0;
+				padding: 0.5em;
+				font-size: 1.6rem;
+				border: none;
+				background: none;
+				cursor: pointer;
+
+				&:hover {
+					color: white;
+				}
+			}
+		}
+	}
+
+	}
 }
 
 ////// FAQ ////////
@@ -598,6 +791,15 @@ body {
 		flex-direction: column;
 		justify-content: center;
 		padding: 1em 5em;
+
+
+		.fa-solid {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			right: 20px;
+			
+		}
 	}
 
 	&__btn {
@@ -615,6 +817,7 @@ body {
 		border-radius: 6px;
 		transition: background-color 0.3s, color 0.3s;
 		transform: translateX(-200px);
+
 
 		&:hover {
 			background-color: #2451e5;
@@ -677,6 +880,12 @@ body {
 			animation-timing-function: ease-out;
 		}
 	}
+
+
+
+
+
+	
 }
 
 ///////        CONTACT       /////////////
@@ -729,6 +938,7 @@ body {
 		color: white;
 		border: 2px solid rgba(255, 254, 255, 0.907);
 		padding: 0.5em;
+		margin-top: 1em;
 		font-size: 1.8rem;
 		background-color: rgb(53, 14, 107);
 
@@ -906,10 +1116,7 @@ body {
 			cursor: pointer;
 		}
 
-		
-
 		@keyframes show-cookies {
-
 			to {
 				opacity: 1;
 				transform: translateY(0);
@@ -988,7 +1195,74 @@ body {
 			font-size: 4rem;
 			padding: 2em 0 2em 2em;
 		}
+
+
+			/////////// ORDER //////////// 
+
+
+		.order {
+			width: 600px;
+			height: 700px;
+
+
+			&__title {
+
+				font-size: 3rem;
+			}
+
+			&__box {
+
+
+
+				&-console {
+					font-size: 2rem;
+				}
+
+				img {
+					width: 100px;
+					height: 100px;
+				}
+
+
+				&-label {
+					font-size: 2rem;
+				}
+
+				&-input {
+					font-size: 2rem;
+				}
+
+
+				&-price {
+
+					&-txt {
+						font-size: 4rem;
+					}
+
+					&-btn {
+						font-size: 2rem;
+					}
+				}
+
+				&-btn {
+
+					&-close {
+						font-size: 2rem;
+				
+					}
+				}
+			}
+		}
+	
 	}
+
+
+
+	
+
+
+
+	
 
 	//========== faq ====//////////
 
@@ -1241,5 +1515,3 @@ body {
 		}
 	}
 }
-
-

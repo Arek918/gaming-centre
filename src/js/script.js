@@ -14,6 +14,17 @@ const dropdownLink = document.querySelectorAll('.dropdown-link');
 
 const btn = document.querySelector('.nav-desktop__search-btn');
 const input = document.querySelector('.nav-desktop__search-input');
+const products = document.querySelectorAll('.nav-desktop__search-list-li');
+const productsList = document.querySelector('.nav-desktop__search-list');
+const searchLink = document.querySelectorAll('.search-link');
+
+//serch mobile input
+
+const mBtn = document.querySelector('.nav-mobile__search-btn');
+const mInput = document.querySelector('.nav-mobile__search-input');
+const mProducts = document.querySelectorAll('.nav-mobile__search-list-li');
+const mProductsList = document.querySelector('.nav-mobile__search-list');
+const mSearchLink = document.querySelectorAll('.mobile-search-link');
 
 //  HIDE BAR
 
@@ -32,78 +43,73 @@ const footerYear = document.querySelector('.footer__year');
 
 const faq = document.querySelector('.faq__box');
 const faqBtns = document.querySelectorAll('.faq__btn');
+const faqIcons = document.querySelectorAll('.faq-icon')
 
 // COOKIE-ALERT
 
 const cookieBox = document.querySelector('.cookie-box');
 const cookieBtn = document.querySelector('.cookie-box__btn');
 
+// ADVE WRD ANIMATION
+const adveWrd = document.querySelectorAll('.adve-wrd');
 
-// ADVE WRD ANIMATION 
-const adveWrd = document.querySelectorAll('.adve-wrd')
+// Order
+const offersBtn = document.querySelectorAll('.offers__card-btn');
+const orderClose = document.querySelector('.order__box-btn-close');
+const orderWindow = document.querySelector('.order');
+const orderConsole = document.querySelector('.order__box-console');
+const orderTitle = document.querySelectorAll('.offers__card-title');
+const cardBody = document.querySelectorAll('.offers__card-body');
+const orderImg = document.querySelectorAll('.order-img');
+const orderNewImg = document.querySelector('.order__box-img');
 
+// fa brands observer
 
-// OFFERS CARD ANIMATION 
+const brands = document.querySelectorAll('.brand');
 
-const offersCard = document.querySelectorAll('.offers__card')
+/// fa brands- observer
 
-
-
-/// OFFERS CARD ANIMATION 
-
-const observeOffersCard = new IntersectionObserver(
+const brandsObserver = new IntersectionObserver(
 	(entries) => {
 		entries.forEach((entry) => {
-			entry.target.classList.toggle('offers__card--active', entry.isIntersecting)
+			entry.target.classList.toggle('brands--active', entry.isIntersecting);
 
-			if(entry.isIntersecting) {
-				observeOffersCard.unobserve(entry.target)
+			if (entry.isIntersecting) {
+				brandsObserver.unobserve(entry.target);
 			}
-		})
+		});
 	},
-
 	{
-		rootMargin: '100px 0px -100px 0px',
-		// threshold: 1,
+		rootMargin: '200px 0px -300px 0px',
+		
+		
 	}
-)
+);
 
-offersCard.forEach((card) => {
-	observeOffersCard.observe(card)
-})
+brands.forEach((brand) => {
+	brandsObserver.observe(brand);
+});
 
-
-///ADVE WRD ANIMATION 
-
+///ADVE WRD ANIMATION
 
 const observeAdweWrd = new IntersectionObserver(
 	(entries) => {
 		entries.forEach((entry) => {
-			entry.target.classList.toggle('adve-wrd--active', entry.isIntersecting)
+			entry.target.classList.toggle('adve-wrd--active', entry.isIntersecting);
 
-			if(entry.isIntersecting){
-				observeAdweWrd.unobserve(entry.target)
+			if (entry.isIntersecting) {
+				observeAdweWrd.unobserve(entry.target);
 			}
-
-		})
+		});
 	},
 	{
-		rootMargin: '100px 0px -100px 0px'
+		rootMargin: '100px 0px -100px 0px',
 	}
-
-)
+);
 
 adveWrd.forEach((adv) => {
-	observeAdweWrd.observe(adv)
-})
-
-
-
-
-
-
-
-
+	observeAdweWrd.observe(adv);
+});
 
 /// COOKIE-ALERT
 
@@ -149,18 +155,44 @@ faqBtns.forEach((btns) => {
 
 //------ faq accordion
 
+
+
 function openFaqItems() {
 	if (this.nextElementSibling.classList.contains('faq__info--active')) {
+		
 		this.nextElementSibling.classList.remove('faq__info--active');
+		this.firstChild.nextElementSibling.classList.add('fa-plus');
+
+		this.firstChild.nextElementSibling.classList.remove('fa-minus');
+		
+	
+		
+
+	
 	} else {
 		closeFaqItems();
 		this.nextElementSibling.classList.toggle('faq__info--active');
+		this.firstChild.nextElementSibling.classList.remove('fa-plus');
+        this.firstChild.nextElementSibling.classList.add('fa-minus');
+
+	
+
+		
+
 	}
 }
 
 const closeFaqItems = () => {
 	const allActiveItems = document.querySelectorAll('.faq__info');
 	allActiveItems.forEach((item) => item.classList.remove('faq__info--active'));
+
+	faqIcons.forEach((icon) => {
+		icon.classList.remove('fa-minus')
+		icon.classList.add('fa-plus')
+
+	})
+
+
 };
 
 const clickOutsideFaq = (e) => {
@@ -262,6 +294,110 @@ burgerBtn.addEventListener('click', handleNav);
 
 const showSearchBar = () => {
 	input.classList.toggle('active');
+	clearSearchList();
 };
 
+const arrProducts = [...products];
+
+// console.log(arrProducts);
+
+const searchWord = (e) => {
+	const currentWord = e.target.value;
+	let result = arrProducts;
+
+	productsList.textContent = '';
+
+	result = result.filter((arrProducts) =>
+		arrProducts.textContent.toLowerCase().includes(currentWord)
+	);
+
+	result.forEach((product) => productsList.append(product));
+
+	if (currentWord == 0) {
+		productsList.textContent = '';
+		productsList.style.visibility = 'hidden';
+	} else {
+		productsList.style.visibility = 'visible';
+	}
+};
+
+const clearSearchList = () => {
+	productsList.style.visibility = 'hidden';
+};
+
+searchLink.forEach((link) => {
+	link.addEventListener('click', () => {
+		productsList.style.visibility = 'hidden';
+	});
+});
+
 btn.addEventListener('click', showSearchBar);
+
+input.addEventListener('input', searchWord);
+
+/// mobile search box
+
+const mArrProducts = [...mProducts];
+
+const mSearchWord = (e) => {
+	const currentWord = e.target.value;
+	let mResult = mArrProducts;
+
+	mProductsList.textContent = '';
+
+	mResult = mResult.filter((mArrProducts) =>
+		mArrProducts.textContent.toLocaleLowerCase().includes(currentWord)
+	);
+
+	mResult.forEach((product) => {
+		mProductsList.append(product);
+	});
+
+	if (currentWord == 0) {
+		mProductsList.textContent = '';
+		mProductsList.style.display = 'none';
+	} else {
+		mProductsList.style.display = 'block';
+	}
+};
+
+mSearchLink.forEach((link) => {
+	link.addEventListener('click', () => {
+		mProductsList.style.display = 'none';
+		nav.classList.remove('nav-mobile--active');
+		barOne.classList.remove('active__bar--one');
+		barTwo.classList.remove('active__bar--two');
+		barThree.classList.remove('active__bar--three');
+	});
+});
+
+mInput.addEventListener('input', mSearchWord);
+
+// console.log(orderImg[1].attributes[1].textContent);
+
+const orderOn = () => {
+	orderWindow.style.display = 'flex';
+};
+
+const orderOff = () => {
+	orderWindow.style.display = 'none';
+};
+
+offersBtn.forEach((btn) => {
+	btn.addEventListener('click', (e) => {
+		const newImg =
+			e.target.parentElement.parentElement.firstChild.nextElementSibling
+				.attributes[1].textContent;
+
+		orderNewImg.attributes[1].textContent = newImg;
+
+		const newTitle =
+			e.target.parentElement.firstChild.nextElementSibling.textContent;
+
+		orderConsole.textContent = `Wybrałeś ${newTitle}`;
+
+		orderOn();
+	});
+});
+
+orderClose.addEventListener('click', orderOff);
