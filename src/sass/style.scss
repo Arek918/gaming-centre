@@ -195,7 +195,7 @@ body {
 	height: 600px;
 	transform: translateX(100%);
 	transition: height 0.3s, transform 0.3s;
-	background-color: rgb(113, 132, 238);
+	background-color: rgb(14, 14, 72);
 	box-shadow: 8px 9px 6px -3px rgba(0, 0, 0, 0.697);
 	border-radius: 5px;
 	z-index: 9999;
@@ -297,11 +297,11 @@ body {
 	&__search-btn {
 		position: absolute;
 		right: -20px;
-		height: 60px;
+		height: 50px;
 		width: 60px;
-		border: 5px solid rgb(103, 103, 250);
-		border-radius: 50px;
-		background-color: #66a0fd;
+		border: 5px solid #afb8ee;
+		border-radius: 5px;
+		background-color: #0e0e48;
 		font-size: 2rem;
 		cursor: pointer;
 	}
@@ -808,7 +808,7 @@ body {
 		padding: 1em;
 		margin-bottom: 1em;
 		width: 100%;
-		font-size: 1.6rem;
+		font-size: 1.5rem;
 		text-align: left;
 		border: none;
 		background-color: #001043;
